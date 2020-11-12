@@ -5,68 +5,65 @@ import random
 class Board():
 
     def __init__(self, quant, blink_type):
-        self.lamps = [Lamp(i) for i in range(quant)]
+        self.lamps = [Lamp(i, blink_type, quant) for i in range(quant)]
         self.blink_type = blink_type
 
     def turn_on(self):
-        if self.blink_type == "rand":
-            self.state = 1
-            while self.state == 1:
-                time.sleep(1)
-                for lamp in self.lamps:
-                    if lamp.state == 0:
-                        x = threading.Thread(target=lamp.blink, args=(id,), daemon=True)
-                        x.start()
-
-        elif self.blink_type == "line":
-            self.state = 1
-            while self.state == 1:
-                for lamp in self.lamps:
-                    if lamp.state == 0:
-                        x = threading.Thread(target=lamp.blink, args=(id,))
-                        x.start()
-                        x.join()
+        self.state = 1
+        for lamp in self.lamps:
+            lamp.state = 1
+            lamp.proc.start()
+        self.lamps[0].event.set()
+        self.lamps[0].event.clear()
 
     def turn_off(self):
         self.state = 0
-
+        for lamp in self.lamps:
+            lamp.state = 0
+            lamp.proc.join()
 
 
 class Lamp():
 
-
-    def __init__(self, id):
+    def __init__(self, id, blink_type, quant):
         self.id = id
         self.state = 0
+        self.quant = quant
+        self.blink_type = blink_type
+        self.event = threading.Event()
+        self.proc = threading.Thread(target=self.blink, daemon=True)
         print(f"lamp {self.id} created")
 
-    def blink(self, id):
-        print(f"lamp {self.id} turned on")
-        self.state = 1
-        time.sleep(random.randint(5,10))
-        print(f"lamp {self.id} turned off")
-        self.state = 0
 
-
-
-
-
+    def blink(self):
+        while self.state == 1:
+            
+            if self.blink_type == "line":
+                self.event.wait()
+            
+            print(f"lamp {self.id} turned on")
+            time.sleep(random.randint(3,7))
+            print(f"lamp {self.id} turned off")
+            time.sleep(random.randint(1,2))
+            
+            if self.blink_type == "line":
+                next_id = self.id + 1 if self.id < self.quant - 1 else 0
+                board.lamps[next_id].event.set()
+                board.lamps[next_id].event.clear()
 
 
 
 if __name__ == "__main__":
     print("random lamps")
     board = Board(3,"rand")
-    proc = threading.Thread(target=board.turn_on)
-    proc.start()
-    time.sleep(10)
+    board.turn_on()
+    time.sleep(15)
     board.turn_off()
-    proc.join()
+
+    print("")
 
     print("lamps in line")
     board = Board(3,"line")
-    proc = threading.Thread(target=board.turn_on)
-    proc.start()
-    time.sleep(10)
+    board.turn_on()
+    time.sleep(15)
     board.turn_off()
-    proc.join()
