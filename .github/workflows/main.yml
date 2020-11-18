@@ -29,7 +29,7 @@ jobs:
         run: |
          python -m pip install -r requirements.txt 
          python ./cv/cv_generator.py
-         working-directory: ./cv
+         mv ./cv/index.html ./index.html
 
 
 #       - name: export index
