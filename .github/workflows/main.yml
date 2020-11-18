@@ -31,7 +31,7 @@ jobs:
          python ./cv/cv_generator.py
          ls
          ls ..
-         cat cv/index.html
+         cat index.html
 
 #       - name: export index
 #         .... # use crosponding script or actions to help export.
