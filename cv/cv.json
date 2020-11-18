@@ -5,7 +5,7 @@
     "sex": "Мужчина",
     "phone": "+7 (916) 987-32-79",
     "mail": "danersow@gmail.com",
-    "site": "danielkanzel.github.io",
+    "site": "https://danielkanzel.github.io",
     "github": "https://github.com/danielkanzel",
     "telegram": "@dershov",
     "telegram_link": "https://t.me/dershov",
@@ -188,7 +188,7 @@
         {
             "name": "Челленджи по программированию",
             "description": "Внутрикомандная традиция по решению несложных задач",
-            "link": ""
+            "link": "https://danielkanzel.github.io/challenges/index.html"
         }
     ],
     "education": [{
