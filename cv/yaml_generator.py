@@ -8,7 +8,7 @@ me = {
     "phone":"+7 (916) 987-32-79",
     "mail":"danersow@gmail.com",
     "site": "danielkanzel.github.io",
-    "github": "https://github.com/danielkanzel"
+    "github": "https://github.com/danielkanzel",
     "age": 26,
     "bithday": "29 ноября 1994",
     "town": "Москва",

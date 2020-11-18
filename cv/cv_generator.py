@@ -1,10 +1,13 @@
 from jinja2 import Template
-import yaml
+import json
+from bs4 import BeautifulSoup as bs
 
-template = env.get_template('mytemplate.html')
 
-with open("cv.yml", 'r') as stream:
-    try:
-        print(yaml.safe_load(stream))
-    except yaml.YAMLError as exc:
-        print(exc)
+me = json.loads(open("cv.json",encoding="utf-8").read())
+
+template = Template(open('template.html', encoding="utf-8").read())
+
+
+f = open("index.html", "w", encoding="utf-8")
+f.write(bs(template.render(person=me), 'html.parser').prettify())
+f.close()

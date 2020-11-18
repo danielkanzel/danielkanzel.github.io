@@ -2,78 +2,122 @@
 
 <head>
     <link rel="icon" href="">
+    <script src="styles.css" type="text/javascript"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <title>{{person["lastname"]}} {{person["name"]}} {{person["patronym"]}}</title>
 </head>
 
-<body>
+<body class="content">
+    <h1 class="title">{{person["lastname"]}} {{person["name"]}} {{person["patronym"]}}</h1>
     <div class="intro">
         <!-- Имя, фамилия, телефон, почта, возраст,
         дата рождения, город, фото, сайт, гитхаб -->
         <div class="intro-summary">
-            <h1 class="intro-title"></h1>
-            <p class="intro-birthdate"></p>
-            <p class="intro-phone"></p>
-            <p class="intro-email"></p>
-            <p class="intro-telegram"></p>
-            <p class="intro-site"></p>
-            <p class="intro-github"></p>
+            <p class="intro-birthdate">{{person["age"]}} лет, родился {{person["birthday"]}}</p>
+            <ul>
+                <li> Телефон:
+                <a class="intro-phone" href="tel:{{person['phone']}}">{{person["phone"]}}</a>
+                </li><li> Email:
+                <a class="intro-email" href="mailto:{{person['mail']}}">{{person["mail"]}}</a>
+                </li><li> Telegram:
+                <a class="intro-telegram" href="{{person['telegram_link']}}">{{person["telegram"]}}</a>
+                </li><li> Сайт:
+                <a class="intro-site" href="{{person['site']}}">{{person['site']}}</a>
+                </li><li> Github:
+                <a class="intro-github" href="{{person['site']}}">{{person['github']}}</a>
+                </li>
+            </ul>
         </div>
-        <div class="intro-photo">
-            <img src="">
-        </div>
+        <img class="intro-photo" src="static/myface.png">
     </div>
     <div class="speciality">
         <!-- Специальность -->
-        <h2 class="speciality-title"></h2>
-        <p class="speciality-sphere"></p>
+        <h2 class="speciality-title">{{person['speciality']['name']}}</h2>
+        <p class="speciality-sphere">{{person['speciality']['sphere']}}</p>
         <ul class="competence">
-            <li></li>
+            {% for competence in person['speciality']['competence'] %}
+            <li>{{competence}}</li>
+            {% endfor %}
         </ul>
     </div>
     <div class="experience">
         <!-- Общий опыт -->
-        <h2 class="experience-title"></h2>
+        <h2 class="experience-title">Стаж: {{person['experience_agg']}}</h2>
         <!-- Прошлые работы -->
+        {% for job in person['experience'] %}
         <div class="job-entry">
             <div class="entry-time">
-                <p class="entry-time-gap"></p>
-                <p class="entry-time-lambda"></p>
+                <p class="entry-time-gap">{{job["begin"]}} - {{job["end"]}}</p>
+                <p class="entry-time-lambda">{{job["delta"]}}</p>
             </div>
             <div class="entry-description">
-                <h3 class="job-name"></h3>
-                <p class="job-intro"></p>
-                <h3 class="job-position"></h3>
+                <h3 class="job-name">{{job["name"]}}</h3>
+                <p class="job-intro">{{job["town"]}}</p>
+                <h3 class="job-position">{{job["position"]}}</h3>
+                {% for res in job["results"] %}
                 <div class="job-part">
-                    <h4 class="job-part-header"></h4>
+                    {% if res == "responcibilities" %}
+                        <h4 class="job-part-header">Обязанности</h4>
+                    {% elif res == "arcievements" %}
+                        <h4 class="job-part-header">Достижения</h4>
+                    {% elif res == "projects" %}
+                        <h4 class="job-part-header">Ключевые проекты</h4>
+                    {% endif %}
                     <ul class="job-part-descr">
-                        <li></li>
+                        {% for point in job["results"][res] %}
+                        <li>{{point}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
-                <p class="free-descr"></p>
+                {% endfor %}
+                <p class="free-descr">{{job['free_description']}}</p>
             </div>
         </div>
+        {% endfor %}
     </div>
     <div class="skills">
+    <h2> Навыки </h2>
         <!-- Опыт, флекс врапом -->
-        <span class="skill"></span>
-    </div>
-    <div class="activities">
-        <!-- Активности -->
-        <h4 class="activity-title"></h4>
-        <p class="activity-descr"></p>
-        <a class="activity-link"></a>
-    </div>
-    <div class="education">
-        <!-- Образование -->
-        <p class="education-year"></p>
-        <div>
-            <h4 class="education-title"></h4>
-            <p class="education-speciality"></p>
+        <div class="skills-list">
+        {% for skill in person["skills"] %}
+            <span class="skill">{{skill}}</span>
+        {% endfor %}
         </div>
     </div>
+    <div class="activities">
+    <h2> Активности и хобби </h2>
+        <!-- Активности -->
+        {% for activity in person["activities"] %}
+            <div class="activity">
+                <h4 class="activity-title">{{activity["name"]}}</h4>
+                <p class="activity-descr">{{activity["description"]}}</p>
+                <a class="activity-link" href='{{activity["link"]}}'>{{activity["link"]}}</a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="educations">
+    <h2> Образование </h2>
+        <!-- Образование -->
+        {% for ed in person["education"] %}
+        <div class="education">
+            <div class="education-year">
+                <p>{{ed["year"]}}</p>
+            </div>
+            <div class="education-descr">
+                <h4 class="education-title">{{ed["name"]}}</h4>
+                <p class="education-speciality">{{ed["speciality"]}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     <div class="languages">
+    <h2> Языки </h2>
         <!-- Языки -->
         <ul class="languages-list">
-            <li></li>
+        {% for lang in person["languages"] %}
+            <li>{{lang["language"]}} - {{lang["level"]}}</li>
+        {% endfor %}
         </ul>
     </div>
 </body>
