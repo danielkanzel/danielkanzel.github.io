@@ -51,9 +51,7 @@ jobs:
             git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
         working-directory: ./output
 
-      - name: Push and send notification
+      - name: Push
         run: |
-            COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
-            git commit -m "${COMMIT_MESSAGE}"
-            git push
+            ghp-import gh-output -r https://${{ secrets.ACESS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git -f -p -b master
         working-directory: ./output
