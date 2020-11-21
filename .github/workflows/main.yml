@@ -44,11 +44,14 @@ jobs:
             git add --all
         working-directory: ./output
       
+      - name: Check diff
+        run: |
+            git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
+        working-directory: ./output
+
       - name: Push and send notification
         run: |
             COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
-            git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
-            # Only if repo have changes
             git commit -m "${COMMIT_MESSAGE}"
             git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_ACTOR}/${GITHUB_ACTOR}.github.io.git master
         working-directory: ./output
