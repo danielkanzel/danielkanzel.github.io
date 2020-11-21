@@ -20,7 +20,6 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip3 install setuptools
           pip3 install -r requirements.txt
           
       - name: Make output folder
@@ -42,7 +41,7 @@ jobs:
           
       - name: Set git config and add changes
         run: |
-            git config --global user.email "${GITHUB_ACTOR}@gmail.com"
+            git config --global user.email "${GITHUB_ACTOR}@https://users.noreply.github.com/"
             git config --global user.name "${GITHUB_ACTOR}"
             git add --all
         working-directory: ./output
@@ -52,7 +51,9 @@ jobs:
             git diff-index --quiet --cached HEAD -- && echo "No changes!" && exit 0 || echo $COMMIT_MESSAGE
         working-directory: ./output
 
-      - name: Push
+      - name: Push and send notification
         run: |
-            ghp-import gh-output -r https://${{ secrets.ACESS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git -f -p -b master
+            COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "${COMMIT_MESSAGE}"
+            git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_ACTOR}/${GITHUB_ACTOR}.github.io.git master
         working-directory: ./output
