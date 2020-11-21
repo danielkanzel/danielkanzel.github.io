@@ -1,4 +1,2 @@
 jinja2
 beautifulsoup4
-setuptools
-ghp-import
