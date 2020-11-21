@@ -30,7 +30,7 @@ jobs:
 
       - name: generate_cv
         run: |
-            python cv.py
+            python cv_generator.py
             
       - name: move cv to output packet
         run: |
