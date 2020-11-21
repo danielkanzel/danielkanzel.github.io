@@ -55,5 +55,5 @@ jobs:
         run: |
             COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
             git commit -m "${COMMIT_MESSAGE}"
-            git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_ACTOR}/${GITHUB_ACTOR}.github.io.git master
+            git push
         working-directory: ./output
