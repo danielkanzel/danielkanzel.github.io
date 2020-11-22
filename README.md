@@ -1,1 +1,0 @@
-# danielkanzel.github.io
