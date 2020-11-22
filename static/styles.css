@@ -23,6 +23,11 @@
     max-width: 200px;
     float: right;
     margin: auto 30px;
+    border-radius: 30px;
+}
+
+.job-name {
+    margin-top: 0;
 }
 
 .job-entry {
