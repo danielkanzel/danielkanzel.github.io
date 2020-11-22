@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/konva@7.1.4/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>angle between</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        
+        #container {
+            width: 50%
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="appt">Select a time:</label>
+        <input type="time" id="appt" name="appt" step=1 onchange="drawCircle(this)">
+    </div>
+    <div id="container"></div>
+    <script>
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        var stage = new Konva.Stage({
+            container: 'container',
+            width: width / 2,
+            height: height / 2,
+        });
+
+        function drawCircle(time) {
+            stage.destroyChildren()
+
+            var time_arr = time.value.split(':')
+
+            time_arr.push(0) // hack
+
+            var deg_h = time_arr[0] % 12 * (360 / 12) + time_arr[1] * (360 / 12 / 60) + time_arr[2] * (360 / 12 / 60 / 60)
+            var deg_m = time_arr[1] * (360 / 60) + time_arr[2] * (360 / 60 / 60)
+            var deg_s = time_arr[2] * (360 / 60)
+
+            var layer = new Konva.Layer();
+
+            var wedge = new Konva.Wedge({
+                x: stage.width() / 2,
+                y: stage.height() / 2,
+                radius: 90,
+                angle: Math.max(deg_h, deg_m) - Math.min(deg_h, deg_m),
+                fill: 'red',
+                stroke: 'black',
+                strokeWidth: 4,
+                rotation: Math.min(deg_h, deg_m) - 90,
+            });
+
+            var wedge2 = new Konva.Wedge({
+                x: stage.width() / 2,
+                y: stage.height() / 2,
+                radius: 90,
+                angle: (360 - (Math.max(deg_h, deg_m) - Math.min(deg_h, deg_m))),
+                fill: 'blue',
+                stroke: 'black',
+                strokeWidth: 4,
+                rotation: -90 + Math.max(deg_h, deg_m),
+            });
+
+            wedge_pos = wedge.getClientRect()
+
+            var label1 = new Konva.Text({
+                x: stage.width() / 4,
+                y: (stage.height() / 2) + 160,
+                text: "Угол между стрелками:  " + (Math.max(deg_h, deg_m) - Math.min(deg_h, deg_m)).toFixed(2),
+                fontSize: 25,
+                fontFamily: 'Calibri',
+                fill: 'green',
+            });
+
+            var simpleText = new Konva.Text({
+                x: stage.width() / 2 - 15,
+                y: stage.height() / 2 - 125,
+                text: '12',
+                fontSize: 30,
+                fontFamily: 'Calibri',
+                fill: 'green',
+            });
+
+            var simpleText2 = new Konva.Text({
+                x: stage.width() / 2 - 15,
+                y: stage.height() / 2 + 125,
+                text: '6',
+                fontSize: 30,
+                fontFamily: 'Calibri',
+                fill: 'green',
+            });
+
+            var simpleText3 = new Konva.Text({
+                x: stage.width() / 2 + 125,
+                y: stage.height() / 2,
+                text: '3',
+                fontSize: 30,
+                fontFamily: 'Calibri',
+                fill: 'green',
+            });
+
+            var simpleText4 = new Konva.Text({
+                x: stage.width() / 2 - 140,
+                y: stage.height() / 2,
+                text: '9',
+                fontSize: 30,
+                fontFamily: 'Calibri',
+                fill: 'green',
+            });
+
+            // add the shape to the layer
+            layer.add(wedge);
+            layer.add(wedge2);
+            layer.add(simpleText)
+            layer.add(simpleText2)
+            layer.add(simpleText3)
+            layer.add(simpleText4)
+            layer.add(label1)
+
+
+            // add the layer to the stage
+            stage.add(layer);
+        }
+    </script>
+</body>
+
+</html>
