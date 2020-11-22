@@ -53,7 +53,7 @@ jobs:
 
       - name: Push and send notification
         run: |
-            COMMIT_MESSAGE="Update pages on $(date +'%Y-%m-%d %H:%M:%S')"
+            COMMIT_MESSAGE="Generated pages on $(date +'%Y-%m-%d %H:%M:%S')"
             git commit -m "${COMMIT_MESSAGE}"
             git push https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/${GITHUB_ACTOR}/${GITHUB_ACTOR}.github.io.git master
         working-directory: ./output
