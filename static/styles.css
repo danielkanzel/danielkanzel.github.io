@@ -1,83 +1,165 @@
-.content {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    flex-wrap: wrap;
-    max-width: 90%;
-    width: 760px;
-}
 
 .intro {
+    margin: 20px 60px 30px;
+    position: relative;
+    padding: 10px 20px;
+    background:rgba(255, 255, 255, 0.3);
+    color:#fff;
+    border-radius: 10px;
+    line-height: 20px;
     display: flex;
-    flex-grow: 1;
-    justify-content: space-between;
-}
-
-.intro-summary {
-    flex-basis: 50%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items:center;
 }
 
 .intro-photo {
-    flex-grow: 1;
-    flex-basis: 200px;
+    border-radius: 10px;
     max-width: 200px;
     float: right;
-    margin: auto 30px;
+    align-self:stretch;
+} 
+
+.other {
+    margin: 0px 60px 30px 0px;
+    position: relative;
+    padding: 10px 20px;
+    background:rgba(255, 255, 255, 0.3);
+    color:#fff;
+    border-radius: 10px;
+    line-height: 20px;
+    height: auto;
+    align-self: baseline;
+}
+dd {
+    display: list-item;
+    list-style-type: disc;
+    }
+
+body{
+    font-family: "Open Sans", sans-serif;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#bea2e7+0,86b7e7+100 */
+    background: #bea2e7;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #bea2e7 0%, #86b7e7 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #bea2e7 0%, #86b7e7 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #bea2e7 0%, #86b7e7 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#bea2e7", endColorstr="#86b7e7",GradientType=0 );
+    /* IE6-9 */
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+    "intro intro"
+    "experience other";
+}
+@media screen and (max-width: 575px) {
+    body { 
+      grid-template-areas: 
+        "intro"
+        "other"
+        "experience";
+    grid-template-rows: 1px, auto, auto;
+      grid-template-columns: 1fr;
+   }
+   .other {
+    margin: 0px 60px 30px 60px;
+   }
+   h1 {
+    line-height: normal;
+    }
+}
+#intro {
+    grid-area: intro;
+  }
+#experience {
+    grid-area: experience;
+}
+#other { 
+    grid-area: other;      
 }
 
-.job-entry {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 15px;
+.box{
+    overflow: hidden;
+    padding: 10px 0 40px 60px;
 }
 
-.entry-time {
-    flex-basis: 20%;
+.box ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transition: all 0.5s linear;
+    top:0
 }
 
-.entry-description {
-    flex-basis: 75%;
-    background-color: rgba(203, 209, 211, .3);
-    padding: 15px;
+.box ul:before{
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    border:1px dashed #fff;
+    position: absolute;
+    top:0;
+    left:30px
 }
 
-.skills-list {
-    display: flex;
-    flex-wrap: wrap;
+.box ul li{
+    margin: 20px 60px 60px;
+    position: relative;
+    padding: 10px 20px;
+    background:rgba(255, 255, 255, 0.3);
+    color:#fff;
+    border-radius: 10px;
+    line-height: 20px;
 }
 
-.skill {
-    margin: 4px;
-    padding: 5px 11px;
-    background-color: rgba(203, 209, 211, .3);
+
+.box ul li > span{
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    border:1px solid #fff;
+    position: absolute;
+    top:0;
+    left:-30px
 }
 
-.activity {
-    margin-bottom: 15px;
-    padding: 15px;
-    background-color: rgba(203, 209, 211, .3);
+.box ul li > span:before,.box ul li > span:after{
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background:#ff6d6d;
+    border:2px solid #fff;
+    position: absolute;
+    left:-7.5px
 }
 
-.activity-title {
-    margin-top: 0px;
+.box ul li > span:before{top:-10px}
+.box ul li > span:after{top:99%}
+
+.box .title{
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px
 }
 
-.educations {
-    flex-basis: 100%;
-}
+.box .info:first-letter{text-transform: capitalize;line-height: 1.7}
 
-.education {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 
-.education-year {
-    flex-basis: 20%;
-    max-width: 20%;
+.box .time span{
+    position: absolute;
+    left: -100px;
+    color:#fff;
+    font-size:80%;
+    font-weight: bold;
 }
+.box .time span:first-child{top:-13px}
+.box .time span:last-child{top:99%}
 
-.education-descr {
-    flex-basis: 75%;
-}
