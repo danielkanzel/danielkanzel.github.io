@@ -1,6 +1,6 @@
 
 .intro {
-    margin: 20px 60px 30px;
+    margin: 20px 60px 0px;
     position: relative;
     padding: 10px 20px;
     background:rgba(255, 255, 255, 0.3);
@@ -21,7 +21,7 @@
 } 
 
 .other {
-    margin: 0px 60px 30px 0px;
+    margin: 30px 60px 30px 0px;
     position: relative;
     padding: 10px 20px;
     background:rgba(255, 255, 255, 0.3);
@@ -56,22 +56,7 @@ body{
     "intro intro"
     "experience other";
 }
-@media screen and (max-width: 575px) {
-    body { 
-      grid-template-areas: 
-        "intro"
-        "other"
-        "experience";
-    grid-template-rows: 1px, auto, auto;
-      grid-template-columns: 1fr;
-   }
-   .other {
-    margin: 0px 60px 30px 60px;
-   }
-   h1 {
-    line-height: normal;
-    }
-}
+
 #intro {
     grid-area: intro;
   }
@@ -163,3 +148,30 @@ body{
 .box .time span:first-child{top:-13px}
 .box .time span:last-child{top:99%}
 
+@media all and (max-width: 900px) {
+    body { 
+      grid-template-areas: 
+        "intro"
+        "other"
+        "experience";
+    grid-template-rows: 1px, auto, auto;
+      grid-template-columns: 1fr;
+   }
+   .other {
+    margin: 0px 60px 30px 60px;
+   }
+   h1 {
+    line-height: normal;
+    }
+    .intro {
+        margin: 20px 60px 50px;
+    }
+}
+
+@media all and (min-width: 1500px) {
+    body{
+        grid-template-columns: 40% 40%;
+        justify-content: center;
+    }
+    
+}
