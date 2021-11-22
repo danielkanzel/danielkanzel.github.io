@@ -158,13 +158,21 @@ body{
       grid-template-columns: 1fr;
    }
    .other {
-    margin: 0px 60px 30px 60px;
+    margin: 0px 10px 10px 10px;
    }
    h1 {
     line-height: normal;
     }
     .intro {
-        margin: 20px 60px 50px;
+        margin: 20px 10px 20px;
+    }
+    .box{
+        overflow: hidden;
+        padding: 0px 0 0px 40px;
+    }
+    .box ul li{
+        margin: 20px 10px 60px 60px;
+        padding: 10px 20px;
     }
 }
 
