@@ -31,12 +31,24 @@
     height: auto;
     align-self: baseline;
 }
+dd {
+    display: list-item;
+    list-style-type: disc;
+    }
 
 body{
-    margin: 0;
-    padding: 0;
-    background-color:#ff6d6d;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#bea2e7+0,86b7e7+100 */
+    background: #bea2e7;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #bea2e7 0%, #86b7e7 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #bea2e7 0%, #86b7e7 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #bea2e7 0%, #86b7e7 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#bea2e7", endColorstr="#86b7e7",GradientType=0 );
+    /* IE6-9 */
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: 50% 50%;
@@ -130,7 +142,7 @@ body{
 }
 
 .box ul li > span:before{top:-10px}
-.box ul li > span:after{top:95%}
+.box ul li > span:after{top:99%}
 
 .box .title{
     text-transform: uppercase;
@@ -148,6 +160,6 @@ body{
     font-size:80%;
     font-weight: bold;
 }
-.box .time span:first-child{top:-16px}
-.box .time span:last-child{top:94%}
+.box .time span:first-child{top:-13px}
+.box .time span:last-child{top:99%}
 
